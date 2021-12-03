@@ -28,21 +28,9 @@ class SimpleNeuralNetwork(object):
 
         self.lr = learning_rate
         
-        #### Set self.activation_function to your implemented sigmoid function ####
-        #
-        # Note: in Python, you can define a function with a lambda expression,
-        # as shown below.
+        ## Set self.activation_function
         
-        self.activation_function = lambda x : 1 / (1 + np.exp(-x))  # Replace 0 with your sigmoid calculation.
-        
-        ### If the lambda code above is not something you're familiar with,
-        # You can uncomment out the following three lines and put your 
-        # implementation there instead.
-        #
-        #def sigmoid(x):
-        #    return 0  # Replace 0 with your sigmoid calculation here
-        #self.activation_function = sigmoid
-                    
+        self.activation_function = lambda x : 1 / (1 + np.exp(-x))                    
 
     def train(self, features, targets):
         ''' Train the network on batch of features and targets. 
@@ -63,9 +51,7 @@ class SimpleNeuralNetwork(object):
         
         for X, y in zip(features, targets):
             
-            final_outputs, hidden_outputs = self.forward_pass_train(X)  # Implement the forward pass function below
-            
-            # Implement the backproagation function below
+            final_outputs, hidden_outputs = self.forward_pass_train(X) 
             
             delta_weights_i_h, delta_weights_h_o = self.backpropagation(
                 final_outputs, 
@@ -86,15 +72,15 @@ class SimpleNeuralNetwork(object):
             ---------
             X: features batch
         '''
-        #### Implement the forward pass here ####
+        
         ### Forward pass ###
-        # Hidden layer - Replace these values with your calculations.
+        # Hidden layer
         
         hidden_inputs = np.dot(X, self.weights_input_to_hidden) # signals into hidden layer
         
         hidden_outputs = self.activation_function(hidden_inputs) # signals from hidden layer
 
-        # Output layer - Replace these values with your calculations.
+        # Output layer 
         
         final_inputs = np.dot(hidden_outputs, self.weights_hidden_to_output) # signals into final output layer
         
@@ -113,18 +99,17 @@ class SimpleNeuralNetwork(object):
             delta_weights_h_o: change in weights from hidden to output layers
         '''
         
-        #### Implement the backward pass here ####
         ### Backward pass ###
 
-        # Output error - Replace this value with your calculations.
+        # Output error 
         
         error = y - final_outputs # Output layer error is the difference between desired target and actual output.
         
-        # Calculate the hidden layer's contribution to the error
+        # Hidden layer's contribution to the error
         
         hidden_error = np.dot(self.weights_hidden_to_output, error) 
         
-        # Backpropagated error terms - Replace these values with your calculations.
+        # Backpropagated error terms 
         
         output_error_term = error
         
@@ -162,14 +147,13 @@ class SimpleNeuralNetwork(object):
             features: 1D array of feature values
         '''
         
-        #### Implement the forward pass here ####
-        # Hidden layer - replace these values with the appropriate calculations.
+        # Hidden layer
         
         hidden_inputs =  np.dot(features, self.weights_input_to_hidden)
         
         hidden_outputs = self.activation_function(hidden_inputs)
         
-        # Output layer - Replace these values with the appropriate calculations.
+        # Output layer
         
         final_inputs = np.dot(hidden_outputs, self.weights_hidden_to_output)
         
